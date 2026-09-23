@@ -132,9 +132,7 @@ fn main() -> Result<()> {
                 ..spec
             };
             enter_tap(&spec.get_device(&api)?.0)?;
-            println!(
-                "TAP mode request sent. Device should re-enumerate as a CDC/TAP interface."
-            );
+            println!("TAP mode request sent. Device should re-enumerate as a CDC/TAP interface.");
         }
         Opt::EnterDfu { spec } => {
             let spec = DeviceSpec {
