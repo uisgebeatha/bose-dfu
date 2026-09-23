@@ -48,9 +48,11 @@ port and does not send a TAP command.
 > system-fault evidence. Once cleared, information needed to understand the
 > original failure may be lost.
 
-`sf` is the system-fault bitfield, not a locale command. On M3 firmware, `lc`
-returns locale information such as `en-us`; it must not be described or used as
-an error-clearing command.
+`sf` is the system-fault bitfield, not a locale command. On M3 1.0.14.6636,
+`lc` returned the locale `en-us`; on the Cup/KCup 1.1.4.3558 CDC/TAP console,
+the same command returned `?ERR`. Do not generalize command availability or
+semantics across device families, and do not describe or use `lc` as an
+error-clearing command.
 
 Fatal battery faults can also cause `vb` and cell-voltage readings to return
 zero while the fault is latched. Zero readings in that state do not by
@@ -97,6 +99,19 @@ misleading while a fatal fault is latched.
 Do not use this example as authorization to force charging, bypass battery
 protection, balance cells manually, or continue operating a suspect pack.
 Follow appropriate battery-safety and product-service procedures.
+
+## Return to normal mode
+
+On the hardware-tested Cup/KCup 1.1.4.3558 unit, the verified return from
+CDC/TAP mode was to issue `sh`, wait for `OK`, disconnect USB power, and then
+reconnect USB power. The speaker then returned to its normal `05A7:40FE` HID
+interface. The use of `sh` here is intentional, but it remains a state-changing
+command that enters ship mode. This procedure is supported by the Bose Mini II
+service manual and has not yet been hardware-verified on M3. A direct
+software-only return from boot mode 6 has not yet been established.
+
+See [Leaving TAP service mode](TAP-SERVICE-MODE.md#leaving-tap-service-mode)
+for the complete verified sequence.
 
 ## Related documentation
 

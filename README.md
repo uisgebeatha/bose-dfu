@@ -54,7 +54,8 @@ Cup/KCup-family unit running 1.1.4.3558 and a SoundLink Mini II Special Edition
 Bose service material explained its intended role, a USBPcap/Wireshark capture
 confirmed the exact host transaction, and both speakers confirmed the resulting
 CDC console. See [TAP service mode](docs/TAP-SERVICE-MODE.md) for the evidence
-and protocol details, [SoundLink Mini II diagnostics](docs/SOUNDLINK-MINI-II-DIAGNOSTICS.md)
+and protocol details, including the verified Cup/KCup exit procedure; see
+[SoundLink Mini II diagnostics](docs/SOUNDLINK-MINI-II-DIAGNOSTICS.md)
 for a repair-oriented workflow, and the [report-ID-1 analysis](docs/research/hid-report1-tap-analysis.md)
 for the reverse-engineering record.
 

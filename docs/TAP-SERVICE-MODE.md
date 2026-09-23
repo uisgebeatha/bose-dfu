@@ -118,6 +118,37 @@ A USBPcap capture examined in Wireshark on the Cup/KCup-family unit confirmed a 
 `SET_REPORT`, report ID 1, `wValue = 0x0301`, length 3, with payload
 `01 B0 5E`.
 
+## Leaving TAP service mode
+
+Entering boot mode 6 is not undone by simply pressing the normal power button.
+On the hardware-tested original SoundLink Mini II Cup/KCup unit running
+firmware 1.1.4.3558, the verified return path is:
+
+1. At the CDC/TAP console, enter:
+
+   ```text
+   sh
+   ```
+
+2. Wait for the device to respond:
+
+   ```text
+   OK
+   ```
+
+3. Disconnect USB power.
+4. Reconnect USB power. The device wakes from ship mode and returns to the
+   normal HID interface at `05A7:40FE`, where bose-dfu identifies it as a
+   compatible device in normal mode.
+
+The `sh` command is state-changing: its intentional purpose here is to put the
+speaker into ship mode. This sequence matches the Bose Mini II service manual,
+which documents `sh` as entering ship mode and reconnecting power as waking the
+unit for normal operation, and it was verified on Cup/KCup hardware.
+
+This exit sequence has not yet been hardware-verified on M3. A cleaner direct
+software-only return from boot mode 6 has also not yet been established.
+
 ## Limitations and safety
 
 The original Bose `hidtool.exe` executable was not recovered or disassembled.
